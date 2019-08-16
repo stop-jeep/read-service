@@ -1,0 +1,13 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: read-service-ingress
+spec:
+  backend:
+  rules:
+    - http:
+        paths:
+          - path: /
+            backend:
+              serviceName: read-service-service
+              servicePort: 8080

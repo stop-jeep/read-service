@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: read-service-deployment
+  labels:
+    app: read-service
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: read-service
+  template:
+    metadata:
+      labels:
+        app: read-service
+    spec:
+      containers:
+        - name: read-service
+          image: insomniacoder/read-service:latest
+          imagePullPolicy: Always
+          resources:
+            requests:
+              memory: "1Gi"
+              cpu: "300m"
+            limits:
+              memory: "1Gi"
+              cpu: "300m"
+          ports:
+            - containerPort: 8080
