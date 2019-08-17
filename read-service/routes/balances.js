@@ -44,12 +44,14 @@ router.get('/:userId/balances', async function (req, res, next) {
       var size = totalEvents.length;
       for(var i = size-1 ; i >=0 ; i--){
         let date = new Date(totalEvents[i].updated)
-        if(date < requestDateTime) {
-          const eventData = JSON.parse(totalEvents[i].data)
-          sum += eventData.amount
-        }
-        else {
-          break;
+        const eventData = JSON.parse(totalEvents[i].data)
+        console.log(eventData.account_id)
+        if(userId === eventData.account_id) {
+          if (date < requestDateTime) {
+            sum += eventData.amount
+          } else {
+            break;
+          }
         }
 
       }
